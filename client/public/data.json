@@ -92,6 +92,11 @@
       "probabilidade_sucesso": 45
     }
   },
+  "acompanhamento_mensal": [
+    {"mes": "Jan", "realizado": {"carteira": 41, "novos": 2, "churn": 1, "indicacoes": 28, "contratos": 7, "operacoes": 5, "captacao": 4200000, "receita": 214000}, "status": "OK"},
+    {"mes": "Fev", "realizado": {"carteira": 42, "novos": 2, "churn": 1, "indicacoes": 30, "contratos": 8, "operacoes": 6, "captacao": 4500000, "receita": 229000}, "status": "OK"},
+    {"mes": "Mar", "realizado": {"carteira": 44, "novos": 3, "churn": 1, "indicacoes": 32, "contratos": 9, "operacoes": 6, "captacao": 4800000, "receita": 244000}, "status": "OK"}
+  ],
   "metas_mensais": [
     {"mes": "Jan", "carteira": 42, "novos": 3, "churn": 1, "indicacoes": 35, "contratos": 9, "operacoes": 6, "captacao": 5000000, "receita": 255000},
     {"mes": "Fev", "carteira": 44, "novos": 3, "churn": 1, "indicacoes": 37, "contratos": 9, "operacoes": 7, "captacao": 5200000, "receita": 265000},

@@ -13,6 +13,7 @@ interface Data {
   metadata: any;
   sumario_executivo: any;
   cenarios: any;
+  acompanhamento_mensal: any[];
   metas_mensais: any[];
   metas_trimestrais: any[];
   gerentes: any;
@@ -81,9 +82,10 @@ export default function Home() {
       {/* Navigation Tabs */}
       <div className="max-w-7xl mx-auto px-6 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-1 h-auto p-1 bg-white shadow-sm rounded-lg">
+          <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-11 gap-1 h-auto p-1 bg-white shadow-sm rounded-lg">
             <TabsTrigger value="sumario" className="text-xs px-2 py-2">Sumário</TabsTrigger>
             <TabsTrigger value="cenarios" className="text-xs px-2 py-2">Cenários</TabsTrigger>
+            <TabsTrigger value="acompanhamento" className="text-xs px-2 py-2">Acompanhamento</TabsTrigger>
             <TabsTrigger value="metas" className="text-xs px-2 py-2">Metas</TabsTrigger>
             <TabsTrigger value="roadmap" className="text-xs px-2 py-2">Roadmap</TabsTrigger>
             <TabsTrigger value="compensacao" className="text-xs px-2 py-2">Compensação</TabsTrigger>
@@ -426,6 +428,123 @@ export default function Home() {
                       </tr>
                     </tbody>
                   </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* ACOMPANHAMENTO MENSAL */}
+          <TabsContent value="acompanhamento" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5" />
+                  Acompanhamento Mensal 2026
+                </CardTitle>
+                <CardDescription>Evolução real vs planejado - Cenário Moderado</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-slate-100">
+                        <th className="text-left p-2 font-semibold">Mês</th>
+                        <th className="text-center p-2 font-semibold">Métrica</th>
+                        <th className="text-center p-2 font-semibold">Planejado</th>
+                        <th className="text-center p-2 font-semibold">Realizado</th>
+                        <th className="text-center p-2 font-semibold">Variação</th>
+                        <th className="text-center p-2 font-semibold">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.acompanhamento_mensal.map((acomp: any, idx: number) => {
+                        const planejado = data.metas_mensais[idx];
+                        const metricas = [
+                          { nome: 'Carteira', key: 'carteira', formato: 'numero' },
+                          { nome: 'Novos', key: 'novos', formato: 'numero' },
+                          { nome: 'Indicações', key: 'indicacoes', formato: 'numero' },
+                          { nome: 'Contratos', key: 'contratos', formato: 'numero' },
+                          { nome: 'Receita', key: 'receita', formato: 'moeda' }
+                        ];
+                        
+                        return metricas.map((m: any, midx: number) => {
+                          const real = acomp.realizado[m.key];
+                          const plan = planejado[m.key];
+                          const variacao = ((real - plan) / plan * 100).toFixed(1);
+                          const variacaoNum = parseFloat(variacao);
+                          const statusColor = variacaoNum >= -5 && variacaoNum <= 5 ? 'green' : variacaoNum < -5 ? 'red' : 'amber';
+                          const statusText = variacaoNum >= -5 && variacaoNum <= 5 ? '✓ OK' : variacaoNum < -5 ? '✗ Abaixo' : '⚠ Acima';
+                          
+                          return (
+                            <tr key={`${acomp.mes}-${m.key}`} className={midx % 2 === 0 ? 'bg-white' : 'bg-slate-50'} style={{borderBottom: midx === metricas.length - 1 ? '2px solid #e2e8f0' : '1px solid #f1f5f9'}}>
+                              <td className="p-2 font-medium">{midx === 0 ? acomp.mes : ''}</td>
+                              <td className="p-2 text-center text-slate-600">{m.nome}</td>
+                              <td className="p-2 text-center font-medium">{m.formato === 'moeda' ? formatCurrency(plan) : plan}</td>
+                              <td className="p-2 text-center font-bold text-blue-700">{m.formato === 'moeda' ? formatCurrency(real) : real}</td>
+                              <td className={`p-2 text-center font-bold ${statusColor === 'green' ? 'text-green-600' : statusColor === 'red' ? 'text-red-600' : 'text-amber-600'}`}>
+                                {variacao}%
+                              </td>
+                              <td className="p-2 text-center">
+                                <Badge className={`${statusColor === 'green' ? 'bg-green-100 text-green-700' : statusColor === 'red' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
+                                  {statusText}
+                                </Badge>
+                              </td>
+                            </tr>
+                          );
+                        });
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Resumo por Mês */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Resumo de Performance por Mês</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {data.acompanhamento_mensal.map((acomp: any, idx: number) => {
+                    const planejado = data.metas_mensais[idx];
+                    const variacaoReceita = ((acomp.realizado.receita - planejado.receita) / planejado.receita * 100).toFixed(1);
+                    const variacaoNum = parseFloat(variacaoReceita);
+                    const statusColor = variacaoNum >= -5 && variacaoNum <= 5 ? 'green' : variacaoNum < -5 ? 'red' : 'amber';
+                    
+                    return (
+                      <div key={acomp.mes} className={`p-4 rounded-lg border-2 ${statusColor === 'green' ? 'bg-green-50 border-green-200' : statusColor === 'red' ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-200'}`}>
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="font-bold text-lg">{acomp.mes}</h4>
+                          <Badge className={`${statusColor === 'green' ? 'bg-green-600' : statusColor === 'red' ? 'bg-red-600' : 'bg-amber-600'}`}>
+                            {variacaoNum >= 0 ? '+' : ''}{variacaoReceita}%
+                          </Badge>
+                        </div>
+                        <div className="space-y-2 text-sm">
+                          <div className="flex justify-between">
+                            <span className="text-slate-600">Carteira</span>
+                            <span className="font-bold">{acomp.realizado.carteira}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-slate-600">Novos</span>
+                            <span className="font-bold text-green-600">+{acomp.realizado.novos}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-slate-600">Indicações</span>
+                            <span className="font-bold">{acomp.realizado.indicacoes}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-slate-600">Contratos</span>
+                            <span className="font-bold">{acomp.realizado.contratos}</span>
+                          </div>
+                          <div className="flex justify-between pt-2 border-t">
+                            <span className="text-slate-600">Receita</span>
+                            <span className="font-bold text-green-600">{formatCurrency(acomp.realizado.receita)}</span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
