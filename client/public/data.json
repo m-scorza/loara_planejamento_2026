@@ -1,0 +1,366 @@
+{
+  "metadata": {
+    "title": "Planejamento Estratégico LOARA 2026 - Parcerias",
+    "version": "3.0",
+    "date": "2026-01-13",
+    "classification": "Estratégico - Confidencial",
+    "author": "Análise Profissional"
+  },
+  "executive_summary": {
+    "vision": "Estabelecer modelo operacional escalável, previsível e orientado por dados para crescimento sustentável no segmento de parcerias",
+    "recommended_scenario": "Moderado",
+    "key_metrics_2025": {
+      "carteira_ativa": 40,
+      "churn_anual": 21.57,
+      "indicacoes_unicas": 156,
+      "contratos_assinados": 47,
+      "operacoes_credito": 33,
+      "captacao_total": 29243714.85,
+      "receita_gerada": 1431438.79,
+      "margem": 4.89
+    }
+  },
+  "scenarios": {
+    "conservador": {
+      "name": "Cenário Conservador",
+      "description": "Manutenção operacional com melhorias incrementais. Foco em retenção e qualidade.",
+      "risk_level": "Baixo",
+      "metrics": {
+        "carteira_inicial": 40,
+        "carteira_final": 45,
+        "novos_parceiros": 25,
+        "churn_esperado": 20,
+        "indicacoes": 310,
+        "negocios_criados": 180,
+        "contratos_assinados": 65,
+        "operacoes_credito": 45,
+        "captacao_projetada": 38500000,
+        "receita_projetada": 1881850,
+        "crescimento_receita": 31.5
+      }
+    },
+    "moderado": {
+      "name": "Cenário Moderado (RECOMENDADO)",
+      "description": "Investimento em estrutura operacional + aquisição estratégica. Equilíbrio entre volume e qualidade.",
+      "risk_level": "Médio",
+      "metrics": {
+        "carteira_inicial": 40,
+        "carteira_final": 80,
+        "novos_parceiros": 50,
+        "churn_esperado": 10,
+        "indicacoes": 520,
+        "negocios_criados": 310,
+        "contratos_assinados": 130,
+        "operacoes_credito": 95,
+        "captacao_projetada": 72500000,
+        "receita_projetada": 3700000,
+        "crescimento_receita": 148.0,
+        "margem_esperada": 5.1
+      }
+    },
+    "agressivo": {
+      "name": "Cenário Agressivo",
+      "description": "Expansão acelerada com investimento em tecnologia e equipe. Foco em volume e market share.",
+      "risk_level": "Alto",
+      "metrics": {
+        "carteira_inicial": 40,
+        "carteira_final": 150,
+        "novos_parceiros": 120,
+        "churn_esperado": 20,
+        "indicacoes": 1080,
+        "negocios_criados": 650,
+        "contratos_assinados": 250,
+        "operacoes_credito": 180,
+        "captacao_projetada": 150000000,
+        "receita_projetada": 7350000,
+        "crescimento_receita": 414.0
+      }
+    }
+  },
+  "gerentes": [
+    {
+      "id": "matheus_scorza",
+      "name": "Matheus Scorza",
+      "role": "Gerente de Parcerias Sênior",
+      "carteira_2025": 35,
+      "carteira_2026_moderado": 80,
+      "proporcao": 0.875,
+      "compensacao": {
+        "salario_base_mensal": 8000,
+        "comissao_aquisicao": {
+          "parceiro_qualificado": 500,
+          "primeiro_contrato": 1000,
+          "primeiro_credito": 500,
+          "total_por_parceiro": 2000
+        },
+        "comissao_recorrente": {
+          "ouro": 200,
+          "prata": 100,
+          "bronze": 50
+        },
+        "bonus_trimestral": {
+          "abaixo_80": 0,
+          "80_90": 1500,
+          "90_100": 2500,
+          "100_110": 4000,
+          "acima_110": 5000
+        }
+      },
+      "metas_2026": {
+        "novos_parceiros": 45,
+        "parceiros_retidos": 32,
+        "indicacoes": 600,
+        "negocios_criados": 310,
+        "contratos_assinados": 140,
+        "operacoes_credito": 100,
+        "receita_corporativa": 3000000
+      },
+      "projecao_renda_anual": {
+        "salario_base": 96000,
+        "comissao_recorrente": 44400,
+        "comissao_aquisicao": 28800,
+        "bonus": 10000,
+        "total": 179200
+      }
+    },
+    {
+      "id": "viviane_andrade",
+      "name": "Viviane Andrade",
+      "role": "Gerente de Parcerias",
+      "carteira_2025": 5,
+      "carteira_2026_moderado": 10,
+      "proporcao": 0.125,
+      "compensacao": {
+        "salario_base_mensal": 6500,
+        "comissao_aquisicao": {
+          "parceiro_qualificado": 500,
+          "primeiro_contrato": 1000,
+          "primeiro_credito": 500,
+          "total_por_parceiro": 2000
+        },
+        "comissao_recorrente": {
+          "ouro": 200,
+          "prata": 100,
+          "bronze": 50
+        },
+        "bonus_trimestral": {
+          "abaixo_80": 0,
+          "80_90": 1500,
+          "90_100": 2500,
+          "100_110": 4000,
+          "acima_110": 5000
+        }
+      },
+      "metas_2026": {
+        "novos_parceiros": 5,
+        "parceiros_retidos": 4,
+        "indicacoes": 120,
+        "negocios_criados": 62,
+        "contratos_assinados": 28,
+        "operacoes_credito": 20,
+        "receita_corporativa": 600000
+      },
+      "projecao_renda_anual": {
+        "salario_base": 78000,
+        "comissao_recorrente": 7200,
+        "comissao_aquisicao": 3840,
+        "bonus": 9200,
+        "total": 98240
+      }
+    }
+  ],
+  "challenges_2025": [
+    {
+      "id": "churn",
+      "title": "Taxa de Churn Elevada",
+      "description": "21,6% ao ano (11 distratos de 51 parceiros)",
+      "impact": "Alto",
+      "solutions": [
+        "Melhor seleção de parceiros na aquisição",
+        "Programa de retenção mais ativo",
+        "Acompanhamento regular da carteira",
+        "Identificação precoce de parceiros em risco"
+      ]
+    },
+    {
+      "id": "lead_qualification",
+      "title": "Falta de Estrutura Formal de Qualificação",
+      "description": "Ausência de critérios e scoring para qualificar leads",
+      "impact": "Alto",
+      "solutions": [
+        "Desenvolvimento de framework de scoring",
+        "Cartilha de qualificação de leads",
+        "Automação de processos de qualificação"
+      ]
+    },
+    {
+      "id": "communication",
+      "title": "Falta de Cadenciamento de Comunicações",
+      "description": "Alto no-show e perda de oportunidades",
+      "impact": "Médio",
+      "solutions": [
+        "Estrutura formal de acompanhamento",
+        "CRM com cadenciamento automático",
+        "Comunicações periódicas com parceiros"
+      ]
+    },
+    {
+      "id": "segmentation",
+      "title": "Carteira Não Segmentada",
+      "description": "Parceiros não ranqueados por potencial",
+      "impact": "Médio",
+      "solutions": [
+        "Segmentação por potencial (Ouro, Prata, Bronze)",
+        "Ranqueamento de parceiros",
+        "Alocação eficiente de recursos"
+      ]
+    },
+    {
+      "id": "data_quality",
+      "title": "Problemas de Qualidade de Dados",
+      "description": "Inconsistências no HubSpot comprometem análises",
+      "impact": "Alto",
+      "solutions": [
+        "Auditoria de qualidade de dados",
+        "Validação e limpeza de dados",
+        "Padronização de definições de métricas"
+      ]
+    }
+  ],
+  "opportunities_2026": [
+    {
+      "id": "operational_model",
+      "title": "Modelo Operacional Estruturado",
+      "description": "Implementação de processos documentados e escaláveis",
+      "timeline": "Q1 2026"
+    },
+    {
+      "id": "ceo_dedication",
+      "title": "Dedicação do CEO para Parcerias",
+      "description": "Relacionamento estratégico com top parceiros",
+      "timeline": "Q1 2026"
+    },
+    {
+      "id": "automation",
+      "title": "Automação de Qualificação",
+      "description": "Processos automáticos de qualificação de leads",
+      "timeline": "Q2 2026"
+    },
+    {
+      "id": "segmentation_ranking",
+      "title": "Segmentação e Ranqueamento",
+      "description": "Carteira segmentada por potencial",
+      "timeline": "Q1 2026"
+    },
+    {
+      "id": "support_team",
+      "title": "Contratação de Assessores",
+      "description": "Suporte operacional para gerentes",
+      "timeline": "Q2 2026"
+    },
+    {
+      "id": "crm_implementation",
+      "title": "Implementação de CRM",
+      "description": "Acompanhamento estruturado com CRM",
+      "timeline": "Q2 2026"
+    }
+  ],
+  "roadmap": [
+    {
+      "quarter": "Q1",
+      "period": "Janeiro - Março",
+      "focus": "Estruturação e Preparação",
+      "activities": [
+        "Limpeza e validação de dados no HubSpot",
+        "Desenvolvimento de framework de scoring",
+        "Implementação de cadenciamento de comunicações",
+        "Segmentação e ranqueamento da carteira",
+        "Definição de critérios de qualificação"
+      ]
+    },
+    {
+      "quarter": "Q2",
+      "period": "Abril - Junho",
+      "focus": "Aquisição e Consolidação",
+      "activities": [
+        "Início de aquisição de novos parceiros (meta: 15)",
+        "Implementação de CRM estruturado",
+        "Treinamento de equipe",
+        "Primeira revisão de KPIs"
+      ]
+    },
+    {
+      "quarter": "Q3",
+      "period": "Julho - Setembro",
+      "focus": "Aceleração",
+      "activities": [
+        "Continuação de aquisição (meta: 20)",
+        "Otimização de processos",
+        "Expansão de equipe",
+        "Revisão intermediária"
+      ]
+    },
+    {
+      "quarter": "Q4",
+      "period": "Outubro - Dezembro",
+      "focus": "Consolidação e Planejamento 2027",
+      "activities": [
+        "Finalização de aquisições (meta: 15)",
+        "Análise de resultados",
+        "Identificação de oportunidades",
+        "Planejamento para 2027"
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "id": "churn_risk",
+      "title": "Churn Elevado de Novos Parceiros",
+      "probability": "Média",
+      "impact": "Alto",
+      "mitigation": "Programa de onboarding estruturado"
+    },
+    {
+      "id": "data_quality_risk",
+      "title": "Qualidade de Dados Inadequada",
+      "probability": "Alta",
+      "impact": "Médio",
+      "mitigation": "Validação e limpeza em Q1"
+    },
+    {
+      "id": "acquisition_risk",
+      "title": "Aquisição Abaixo da Meta",
+      "probability": "Média",
+      "impact": "Médio",
+      "mitigation": "Diversificação de canais de aquisição"
+    },
+    {
+      "id": "capacity_risk",
+      "title": "Capacidade Operacional Insuficiente",
+      "probability": "Média",
+      "impact": "Alto",
+      "mitigation": "Contratação de assessores conforme necessário"
+    },
+    {
+      "id": "regulatory_risk",
+      "title": "Mudanças Regulatórias",
+      "probability": "Baixa",
+      "impact": "Alto",
+      "mitigation": "Monitoramento contínuo de compliance"
+    },
+    {
+      "id": "competition_risk",
+      "title": "Concorrência Aumentada",
+      "probability": "Média",
+      "impact": "Médio",
+      "mitigation": "Diferenciação via qualidade de serviço"
+    }
+  ],
+  "metrics_validation": {
+    "churn_explanation": "Taxa anual de churn: 21,57% (11 distratos de 51 parceiros com histórico). Nunca usar 'taxa mensal' - é matematicamente inválida.",
+    "carteira_calculation": "Usar 51 como denominador (40 ativos + 11 distratos) para cálculo correto de churn.",
+    "indicacoes_definition": "Usar indicações únicas (156) para evitar dupla contagem.",
+    "conversao_validacao": "Contratos/Negócios = 42% (realista). Operações/Contratos = 73% (realista).",
+    "margem_2026": "Margem esperada: 5,1% (melhoria modesta de 0,21pp vs 2025)"
+  }
+}
