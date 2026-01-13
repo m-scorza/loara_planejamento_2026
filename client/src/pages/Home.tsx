@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -36,6 +39,10 @@ const formatCurrency = (value: number) => {
 const formatPercent = (value: number) => `${value.toFixed(1)}%`;
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
+  let { user, loading, error, isAuthenticated, logout } = useAuth();
+
   const [data, setData] = useState<Data | null>(null);
   const [activeTab, setActiveTab] = useState("sumario");
 
@@ -69,11 +76,16 @@ export default function Home() {
               <h1 className="text-3xl font-bold tracking-tight">Cartilha de Planejamento Estratégico</h1>
               <p className="text-blue-200 mt-1">Área de Parcerias - LOARA 2026</p>
             </div>
-            <div className="text-right">
+            <div className="text-right flex flex-col items-end gap-2">
+              <Link href="/files">
+                <Button variant="outline" size="sm" className="bg-white/10 text-white border-white/30 hover:bg-white/20">
+                  📁 Gestão de Ficheiros
+                </Button>
+              </Link>
               <Badge variant="outline" className="bg-green-500/20 text-green-200 border-green-400 text-sm px-3 py-1">
                 Cenário Recomendado: MODERADO
               </Badge>
-              <p className="text-blue-200 text-sm mt-2">Versão 4.0 | 13/01/2026</p>
+              <p className="text-blue-200 text-sm">Versão 4.0 | 13/01/2026</p>
             </div>
           </div>
         </div>
