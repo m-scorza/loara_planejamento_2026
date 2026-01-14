@@ -210,7 +210,7 @@ export default function Home() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Carteira</span>
-                    <Badge className="bg-green-100 text-green-700">+100%</Badge>
+                    <Badge className="bg-green-100 text-green-700">+150%</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Churn</span>
@@ -218,19 +218,19 @@ export default function Home() {
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Indicações</span>
-                    <Badge className="bg-green-100 text-green-700">+233%</Badge>
+                    <Badge className="bg-green-100 text-green-700">+258%</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Contratos</span>
-                    <Badge className="bg-green-100 text-green-700">+177%</Badge>
+                    <Badge className="bg-green-100 text-green-700">+257%</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Captação</span>
-                    <Badge className="bg-green-100 text-green-700">+148%</Badge>
+                    <Badge className="bg-green-100 text-green-700">+284%</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-slate-600">Receita</span>
-                    <Badge className="bg-green-600 text-white text-base">+158%</Badge>
+                    <Badge className="bg-green-600 text-white text-base">+370%</Badge>
                   </div>
                 </CardContent>
               </Card>

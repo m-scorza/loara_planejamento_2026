@@ -8,29 +8,29 @@
   "sumario_executivo": {
     "objetivo": "Estabelecer um modelo operacional escalável, previsível e orientado por dados que permita à LOARA crescer de forma sustentável no segmento de parcerias.",
     "cenario_recomendado": "Moderado",
-    "crescimento_receita": "158%",
+    "crescimento_receita": "370%",
     "baseline_2025": {
       "carteira_ativa": 40,
       "churn_anual": 21.57,
-      "indicacoes_unicas": 156,
-      "negocios_criados": 135,
+      "indicacoes_unicas": 243,
+      "negocios_criados": 200,
       "contratos_assinados": 47,
       "operacoes_credito": 33,
-      "captacao_total": 29243714.85,
-      "receita_gerada": 1431438.79,
+      "captacao_total": 29200000,
+      "receita_gerada": 1430000,
       "margem_operacional": 4.89
     },
     "meta_2026": {
-      "carteira_ativa": 80,
-      "novos_parceiros": 50,
+      "carteira_ativa": 100,
+      "novos_parceiros": 60,
       "churn_anual": 15.0,
-      "indicacoes_unicas": 520,
-      "negocios_criados": 310,
-      "contratos_assinados": 130,
-      "operacoes_credito": 95,
-      "captacao_total": 72500000,
-      "receita_gerada": 3700000,
-      "margem_operacional": 5.10
+      "indicacoes_unicas": 870,
+      "negocios_criados": 520,
+      "contratos_assinados": 168,
+      "operacoes_credito": 120,
+      "captacao_total": 112000000,
+      "receita_gerada": 6720000,
+      "margem_operacional": 6.0
     }
   },
   "cenarios": {
@@ -56,19 +56,19 @@
     "moderado": {
       "nome": "Moderado (Recomendado)",
       "descricao": "Investimento em estrutura operacional + aquisição estratégica de parceiros. Equilíbrio entre volume e qualidade.",
-      "carteira_final": 80,
-      "novos_parceiros": 50,
-      "churn_esperado": 10,
+      "carteira_final": 100,
+      "novos_parceiros": 60,
+      "churn_esperado": 15,
       "taxa_churn": 15.0,
-      "indicacoes": 520,
-      "negocios": 310,
-      "contratos": 130,
-      "operacoes": 95,
-      "captacao": 72500000,
-      "receita": 3700000,
-      "margem": 5.10,
-      "investimento": 300000,
-      "roi": 757,
+      "indicacoes": 870,
+      "negocios": 520,
+      "contratos": 168,
+      "operacoes": 120,
+      "captacao": 112000000,
+      "receita": 6720000,
+      "margem": 6.0,
+      "investimento": 400000,
+      "roi": 1580,
       "risco": "Médio",
       "probabilidade_sucesso": 70
     },
@@ -98,70 +98,70 @@
     {"mes": "Mar", "realizado": {"carteira": 44, "novos": 3, "churn": 1, "indicacoes": 32, "contratos": 9, "operacoes": 6, "captacao": 4800000, "receita": 244000}, "status": "OK"}
   ],
   "metas_mensais": [
-    {"mes": "Jan", "carteira": 42, "novos": 3, "churn": 1, "indicacoes": 35, "contratos": 9, "operacoes": 6, "captacao": 5000000, "receita": 255000},
-    {"mes": "Fev", "carteira": 44, "novos": 3, "churn": 1, "indicacoes": 37, "contratos": 9, "operacoes": 7, "captacao": 5200000, "receita": 265000},
-    {"mes": "Mar", "carteira": 47, "novos": 4, "churn": 1, "indicacoes": 38, "contratos": 10, "operacoes": 7, "captacao": 5300000, "receita": 270000},
-    {"mes": "Abr", "carteira": 50, "novos": 4, "churn": 1, "indicacoes": 42, "contratos": 10, "operacoes": 8, "captacao": 5800000, "receita": 296000},
-    {"mes": "Mai", "carteira": 54, "novos": 5, "churn": 1, "indicacoes": 45, "contratos": 11, "operacoes": 8, "captacao": 6200000, "receita": 316000},
-    {"mes": "Jun", "carteira": 58, "novos": 5, "churn": 1, "indicacoes": 48, "contratos": 12, "operacoes": 9, "captacao": 6500000, "receita": 332000},
-    {"mes": "Jul", "carteira": 62, "novos": 5, "churn": 1, "indicacoes": 52, "contratos": 12, "operacoes": 9, "captacao": 6800000, "receita": 347000},
-    {"mes": "Ago", "carteira": 66, "novos": 5, "churn": 1, "indicacoes": 55, "contratos": 13, "operacoes": 10, "captacao": 7200000, "receita": 367000},
-    {"mes": "Set", "carteira": 71, "novos": 5, "churn": 0, "indicacoes": 59, "contratos": 14, "operacoes": 9, "captacao": 7000000, "receita": 357000},
-    {"mes": "Out", "carteira": 74, "novos": 4, "churn": 1, "indicacoes": 62, "contratos": 14, "operacoes": 8, "captacao": 6000000, "receita": 306000},
-    {"mes": "Nov", "carteira": 78, "novos": 4, "churn": 0, "indicacoes": 65, "contratos": 13, "operacoes": 7, "captacao": 5800000, "receita": 296000},
-    {"mes": "Dez", "carteira": 80, "novos": 3, "churn": 0, "indicacoes": 61, "contratos": 13, "operacoes": 7, "captacao": 5700000, "receita": 291000}
+    {"mes": "Jan", "carteira": 40, "novos": 1, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Fev", "carteira": 41, "novos": 2, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Mar", "carteira": 42, "novos": 2, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Abr", "carteira": 44, "novos": 3, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Mai", "carteira": 47, "novos": 4, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Jun", "carteira": 51, "novos": 5, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Jul", "carteira": 55, "novos": 5, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Ago", "carteira": 60, "novos": 6, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Set", "carteira": 66, "novos": 7, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Out", "carteira": 73, "novos": 8, "churn": 1, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Nov", "carteira": 79, "novos": 8, "churn": 2, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000},
+    {"mes": "Dez", "carteira": 86, "novos": 9, "churn": 2, "indicacoes": 72, "contratos": 14, "operacoes": 10, "captacao": 9333333, "receita": 560000}
   ],
   "metas_trimestrais": [
-    {"trimestre": "Q1", "periodo": "Jan-Mar", "foco": "Estruturação", "novos": 10, "churn_max": 3, "indicacoes": 110, "contratos": 28, "receita": 790000},
-    {"trimestre": "Q2", "periodo": "Abr-Jun", "foco": "Aquisição", "novos": 15, "churn_max": 3, "indicacoes": 135, "contratos": 33, "receita": 945000},
-    {"trimestre": "Q3", "periodo": "Jul-Set", "foco": "Aceleração", "novos": 15, "churn_max": 2, "indicacoes": 150, "contratos": 38, "receita": 1070000},
-    {"trimestre": "Q4", "periodo": "Out-Dez", "foco": "Consolidação", "novos": 10, "churn_max": 2, "indicacoes": 125, "contratos": 31, "receita": 895000}
+    {"trimestre": "Q1", "periodo": "Jan-Mar", "foco": "Estruturação", "novos": 5, "churn_max": 3, "indicacoes": 216, "contratos": 42, "receita": 1680000},
+    {"trimestre": "Q2", "periodo": "Abr-Jun", "foco": "Aquisição", "novos": 12, "churn_max": 3, "indicacoes": 216, "contratos": 42, "receita": 1680000},
+    {"trimestre": "Q3", "periodo": "Jul-Set", "foco": "Aceleração", "novos": 18, "churn_max": 3, "indicacoes": 216, "contratos": 42, "receita": 1680000},
+    {"trimestre": "Q4", "periodo": "Out-Dez", "foco": "Consolidação", "novos": 25, "churn_max": 5, "indicacoes": 216, "contratos": 42, "receita": 1680000}
   ],
   "gerentes": {
     "matheus_scorza": {
       "nome": "Matheus Scorza",
       "cargo": "Gerente Sênior",
       "carteira_2025": 35,
-      "carteira_2026_meta": 80,
+      "carteira_2026_meta": 89,
       "proporcao_carteira": 89,
       "metas_2026": {
-        "novos_parceiros": 45,
-        "indicacoes": 450,
-        "contratos": 115,
-        "operacoes": 84,
-        "captacao": 63500000,
-        "receita_corporativa": 3240000
+        "novos_parceiros": 53,
+        "indicacoes": 774,
+        "contratos": 150,
+        "operacoes": 107,
+        "captacao": 99680000,
+        "receita_corporativa": 5980800
       },
       "compensacao": {
         "salario_base_mensal": 8000,
         "salario_base_anual": 96000,
-        "comissao_aquisicao_anual": 81000,
-        "comissao_recorrente_anual": 60000,
-        "bonus_anual": 14000,
-        "renda_total_anual": 251000
+        "comissao_aquisicao_anual": 106000,
+        "comissao_recorrente_anual": 85000,
+        "bonus_anual": 16000,
+        "renda_total_anual": 303000
       }
     },
     "viviane_andrade": {
       "nome": "Viviane Andrade",
       "cargo": "Gerente",
       "carteira_2025": 5,
-      "carteira_2026_meta": 10,
+      "carteira_2026_meta": 11,
       "proporcao_carteira": 11,
       "metas_2026": {
-        "novos_parceiros": 5,
-        "indicacoes": 70,
-        "contratos": 15,
-        "operacoes": 11,
-        "captacao": 9000000,
-        "receita_corporativa": 460000
+        "novos_parceiros": 7,
+        "indicacoes": 96,
+        "contratos": 18,
+        "operacoes": 13,
+        "captacao": 12320000,
+        "receita_corporativa": 739200
       },
       "compensacao": {
         "salario_base_mensal": 6500,
         "salario_base_anual": 78000,
-        "comissao_aquisicao_anual": 9000,
-        "comissao_recorrente_anual": 8400,
+        "comissao_aquisicao_anual": 14000,
+        "comissao_recorrente_anual": 11000,
         "bonus_anual": 12000,
-        "renda_total_anual": 107400
+        "renda_total_anual": 115000
       }
     }
   },
