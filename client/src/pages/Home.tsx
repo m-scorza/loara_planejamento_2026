@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -9,8 +9,10 @@ import { Progress } from "@/components/ui/progress";
 import { 
   TrendingUp, TrendingDown, Users, Target, DollarSign, 
   AlertTriangle, CheckCircle, Calendar, FileText, BarChart3,
-  ArrowRight, ChevronRight, Building2, Briefcase, Shield
+  ArrowRight, ChevronRight, Building2, Briefcase, Shield, Settings
 } from "lucide-react";
+import { ValoresBase, VALORES_BASE_PADRAO, calcularPlanejamento } from "@/lib/planejamentoModel";
+import EditarValoresBase from "@/components/EditarValoresBase";
 
 interface Data {
   metadata: any;
@@ -45,6 +47,18 @@ export default function Home() {
 
   const [data, setData] = useState<Data | null>(null);
   const [activeTab, setActiveTab] = useState("sumario");
+  const [valoresBase, setValoresBase] = useState<ValoresBase>(VALORES_BASE_PADRAO);
+  const [modoEdicao, setModoEdicao] = useState(false);
+  
+  // Calcular valores automaticamente quando valoresBase mudar
+  const dadosCalculados = useMemo(() => {
+    return calcularPlanejamento(valoresBase);
+  }, [valoresBase]);
+  
+  const handleSaveValores = (novosValores: ValoresBase) => {
+    setValoresBase(novosValores);
+    setModoEdicao(false);
+  };
 
   useEffect(() => {
     fetch("/data.json")
@@ -77,11 +91,22 @@ export default function Home() {
               <p className="text-blue-200 mt-1">Área de Parcerias - LOARA 2026</p>
             </div>
             <div className="text-right flex flex-col items-end gap-2">
-              <Link href="/files">
-                <Button variant="outline" size="sm" className="bg-white/10 text-white border-white/30 hover:bg-white/20">
-                  📁 Gestão de Ficheiros
+              <div className="flex gap-2">
+                <Link href="/files">
+                  <Button variant="outline" size="sm" className="bg-white/10 text-white border-white/30 hover:bg-white/20">
+                    📁 Gestão de Ficheiros
+                  </Button>
+                </Link>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="bg-white/10 text-white border-white/30 hover:bg-white/20"
+                  onClick={() => setModoEdicao(!modoEdicao)}
+                >
+                  <Settings className="h-4 w-4 mr-1" />
+                  {modoEdicao ? 'Fechar Edição' : 'Editar Valores'}
                 </Button>
-              </Link>
+              </div>
               <Badge variant="outline" className="bg-green-500/20 text-green-200 border-green-400 text-sm px-3 py-1">
                 Cenário Recomendado: MODERADO
               </Badge>
@@ -91,6 +116,13 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Painel de Edição */}
+      {modoEdicao && (
+        <div className="max-w-7xl mx-auto px-6 pt-6">
+          <EditarValoresBase valores={valoresBase} onSave={handleSaveValores} />
+        </div>
+      )}
+      
       {/* Navigation Tabs */}
       <div className="max-w-7xl mx-auto px-6 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
@@ -136,27 +168,27 @@ export default function Home() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b">
                     <span className="text-slate-600">Carteira Ativa</span>
-                    <span className="font-bold text-lg">{sumario_executivo.baseline_2025.carteira_ativa}</span>
+                    <span className="font-bold text-lg">{valoresBase.baseline_2025.carteira_ativa}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b">
                     <span className="text-slate-600">Churn Anual</span>
-                    <span className="font-bold text-lg text-red-600">{formatPercent(sumario_executivo.baseline_2025.churn_anual)}</span>
+                    <span className="font-bold text-lg text-red-600">{formatPercent(valoresBase.baseline_2025.churn_anual_percent)}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b">
                     <span className="text-slate-600">Indicações</span>
-                    <span className="font-bold text-lg">{sumario_executivo.baseline_2025.indicacoes_unicas}</span>
+                    <span className="font-bold text-lg">{valoresBase.baseline_2025.indicacoes}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b">
                     <span className="text-slate-600">Contratos</span>
-                    <span className="font-bold text-lg">{sumario_executivo.baseline_2025.contratos_assinados}</span>
+                    <span className="font-bold text-lg">{valoresBase.baseline_2025.contratos}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b">
                     <span className="text-slate-600">Captação</span>
-                    <span className="font-bold text-lg">{formatCurrency(sumario_executivo.baseline_2025.captacao_total)}</span>
+                    <span className="font-bold text-lg">{formatCurrency(valoresBase.baseline_2025.captacao_total)}</span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-slate-600">Receita</span>
-                    <span className="font-bold text-lg text-green-600">{formatCurrency(sumario_executivo.baseline_2025.receita_gerada)}</span>
+                    <span className="font-bold text-lg text-green-600">{formatCurrency(valoresBase.baseline_2025.receita_gerada)}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -173,27 +205,27 @@ export default function Home() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-blue-200">
                     <span className="text-slate-600">Carteira Ativa</span>
-                    <span className="font-bold text-lg text-blue-700">{sumario_executivo.meta_2026.carteira_ativa}</span>
+                    <span className="font-bold text-lg text-blue-700">{valoresBase.meta_2026.carteira_final}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-blue-200">
                     <span className="text-slate-600">Churn Anual</span>
-                    <span className="font-bold text-lg text-green-600">{formatPercent(sumario_executivo.meta_2026.churn_anual)}</span>
+                    <span className="font-bold text-lg text-green-600">{formatPercent(valoresBase.meta_2026.churn_anual_percent)}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-blue-200">
                     <span className="text-slate-600">Indicações</span>
-                    <span className="font-bold text-lg text-blue-700">{sumario_executivo.meta_2026.indicacoes_unicas}</span>
+                    <span className="font-bold text-lg text-blue-700">{valoresBase.meta_2026.indicacoes}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-blue-200">
                     <span className="text-slate-600">Contratos</span>
-                    <span className="font-bold text-lg text-blue-700">{sumario_executivo.meta_2026.contratos_assinados}</span>
+                    <span className="font-bold text-lg text-blue-700">{valoresBase.meta_2026.contratos}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-blue-200">
                     <span className="text-slate-600">Captação</span>
-                    <span className="font-bold text-lg text-blue-700">{formatCurrency(sumario_executivo.meta_2026.captacao_total)}</span>
+                    <span className="font-bold text-lg text-blue-700">{formatCurrency(valoresBase.meta_2026.captacao_total)}</span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-slate-600">Receita</span>
-                    <span className="font-bold text-lg text-green-600">{formatCurrency(sumario_executivo.meta_2026.receita_gerada)}</span>
+                    <span className="font-bold text-lg text-green-600">{formatCurrency(valoresBase.meta_2026.receita_gerada)}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -210,27 +242,27 @@ export default function Home() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Carteira</span>
-                    <Badge className="bg-green-100 text-green-700">+150%</Badge>
+                    <Badge className="bg-green-100 text-green-700">+{dadosCalculados.crescimento.carteira}%</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Churn</span>
-                    <Badge className="bg-green-100 text-green-700">-30%</Badge>
+                    <Badge className="bg-green-100 text-green-700">{dadosCalculados.crescimento.churn}%</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Indicações</span>
-                    <Badge className="bg-green-100 text-green-700">+258%</Badge>
+                    <Badge className="bg-green-100 text-green-700">+{dadosCalculados.crescimento.indicacoes}%</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Contratos</span>
-                    <Badge className="bg-green-100 text-green-700">+257%</Badge>
+                    <Badge className="bg-green-100 text-green-700">+{dadosCalculados.crescimento.contratos}%</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-green-200">
                     <span className="text-slate-600">Captação</span>
-                    <Badge className="bg-green-100 text-green-700">+284%</Badge>
+                    <Badge className="bg-green-100 text-green-700">+{dadosCalculados.crescimento.captacao}%</Badge>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-slate-600">Receita</span>
-                    <Badge className="bg-green-600 text-white text-base">+370%</Badge>
+                    <Badge className="bg-green-600 text-white text-base">+{dadosCalculados.crescimento.receita}%</Badge>
                   </div>
                 </CardContent>
               </Card>
