@@ -13,6 +13,10 @@ import {
 } from "lucide-react";
 import { ValoresBase, VALORES_BASE_PADRAO, calcularPlanejamento } from "@/lib/planejamentoModel";
 import EditarValoresBase from "@/components/EditarValoresBase";
+import { GraficoEvolucaoCarteira } from "@/components/GraficoEvolucaoCarteira";
+import { GraficoComparacaoCenarios } from "@/components/GraficoComparacaoCenarios";
+import { GraficoMetasMensais } from "@/components/GraficoMetasMensais";
+import { GraficoDistribuicaoReceita } from "@/components/GraficoDistribuicaoReceita";
 
 interface Data {
   metadata: any;
@@ -319,7 +323,11 @@ export default function Home() {
           {/* CENÁRIOS */}
           <TabsContent value="cenarios" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {Object.entries(cenarios).map(([key, scenario]: [string, any]) => (
+              {Object.entries({
+                conservador: { nome: 'Conservador', risco: 'Baixo', descricao: 'Cenário cauteloso com crescimento moderado', ...dadosCalculados.cenarios.conservador },
+                moderado: { nome: 'Moderado', risco: 'Médio', descricao: 'Cenário equilibrado (recomendado)', ...dadosCalculados.cenarios.moderado },
+                agressivo: { nome: 'Agressivo', risco: 'Alto', descricao: 'Cenário otimista com crescimento acelerado', ...dadosCalculados.cenarios.agressivo },
+              }).map(([key, scenario]: [string, any]) => (
                 <Card 
                   key={key} 
                   className={`${key === 'moderado' ? 'ring-2 ring-blue-500 shadow-lg' : ''}`}
@@ -343,19 +351,16 @@ export default function Home() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="text-center p-3 bg-slate-50 rounded-lg">
                         <p className="text-xs text-slate-500">Carteira Final</p>
-                        <p className="text-2xl font-bold text-slate-800">{scenario.carteira_final}</p>
+                        <p className="text-2xl font-bold text-slate-800">{scenario.carteira}</p>
                       </div>
                       <div className="text-center p-3 bg-slate-50 rounded-lg">
-                        <p className="text-xs text-slate-500">Novos Parceiros</p>
-                        <p className="text-2xl font-bold text-slate-800">{scenario.novos_parceiros}</p>
+                        <p className="text-xs text-slate-500">Churn Anual</p>
+                        <p className="text-2xl font-bold text-slate-800">{scenario.churn.toFixed(1)}%</p>
                       </div>
                     </div>
                     
                     <div className="space-y-2 pt-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-600">Taxa de Churn</span>
-                        <span className="font-medium">{formatPercent(scenario.taxa_churn)}</span>
-                      </div>
+
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-600">Indicações</span>
                         <span className="font-medium">{scenario.indicacoes}</span>
@@ -365,27 +370,15 @@ export default function Home() {
                         <span className="font-medium">{scenario.contratos}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-600">Operações</span>
-                        <span className="font-medium">{scenario.operacoes}</span>
+                        <span className="text-slate-600">Captação</span>
+                        <span className="font-medium">{formatCurrency(scenario.captacao)}</span>
                       </div>
                     </div>
 
                     <div className="pt-4 border-t space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Captação</span>
-                        <span className="font-bold text-blue-700">{formatCurrency(scenario.captacao)}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Receita</span>
-                        <span className="font-bold text-green-600">{formatCurrency(scenario.receita)}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Investimento</span>
-                        <span className="font-medium">{formatCurrency(scenario.investimento)}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Prob. Sucesso</span>
-                        <span className="font-medium">{scenario.probabilidade_sucesso}%</span>
+                        <span className="text-slate-600">Receita Total</span>
+                        <span className="font-bold text-green-600 text-lg">{formatCurrency(scenario.receita)}</span>
                       </div>
                     </div>
                   </CardContent>
@@ -1165,100 +1158,41 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Comparativo 2025 vs 2026</CardTitle>
+                  <CardTitle>Evolução da Carteira 2026</CardTitle>
+                  <CardDescription>Crescimento progressivo mês a mês</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <img src="/images/01_comparativo_2025_2026.png" alt="Comparativo" className="w-full rounded-lg" />
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Receita e Captação</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img src="/images/02_receita_captacao.png" alt="Receita" className="w-full rounded-lg" />
+                  <GraficoEvolucaoCarteira metas_mensais={dadosCalculados.metas_mensais} />
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
                   <CardTitle>Comparativo dos Cenários</CardTitle>
+                  <CardDescription>Conservador, Moderado e Agressivo</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <img src="/images/03_cenarios_comparativo.png" alt="Cenários" className="w-full rounded-lg" />
+                  <GraficoComparacaoCenarios cenarios={dadosCalculados.cenarios} />
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle>Evolução da Carteira</CardTitle>
+                  <CardTitle>Metas Mensais 2026</CardTitle>
+                  <CardDescription>Indicações, Contratos e Receita</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <img src="/images/04_evolucao_carteira.png" alt="Evolução" className="w-full rounded-lg" />
+                  <GraficoMetasMensais metas_mensais={dadosCalculados.metas_mensais} />
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle>Funil de Conversão</CardTitle>
+                  <CardTitle>Distribuição de Receita</CardTitle>
+                  <CardDescription>Alocação por gerente</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <img src="/images/05_funil_conversao.png" alt="Funil" className="w-full rounded-lg" />
+                  <GraficoDistribuicaoReceita compensacao_gerentes={dadosCalculados.compensacao_gerentes} />
                 </CardContent>
               </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Distribuição da Carteira</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img src="/images/06_distribuicao_carteira.png" alt="Distribuição" className="w-full rounded-lg" />
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Metas Trimestrais</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img src="/images/07_metas_trimestrais.png" alt="Metas" className="w-full rounded-lg" />
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Estrutura de Compensação</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img src="/images/08_compensacao.png" alt="Compensação" className="w-full rounded-lg" />
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Análise de Churn</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img src="/images/09_analise_churn.png" alt="Churn" className="w-full rounded-lg" />
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Roadmap de Implementação</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img src="/images/10_roadmap.png" alt="Roadmap" className="w-full rounded-lg" />
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Matriz de Riscos</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img src="/images/11_matriz_riscos.png" alt="Riscos" className="w-full rounded-lg" />
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Performance por Gerente</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img src="/images/12_performance_gerente.png" alt="Performance" className="w-full rounded-lg" />
-                </CardContent>
-              </Card>
+
             </div>
           </TabsContent>
         </Tabs>

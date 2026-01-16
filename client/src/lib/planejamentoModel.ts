@@ -80,7 +80,66 @@ export function calcularPlanejamento(valores: ValoresBase) {
   const receita_media_por_parceiro = meta_2026.receita_gerada / meta_2026.carteira_final;
   const captacao_media_por_contrato = meta_2026.captacao_total / meta_2026.contratos;
   
+  // Calcular cenários (Conservador: -20%, Moderado: base, Agressivo: +30%)
+  const cenarios = {
+    conservador: {
+      carteira: Math.round(meta_2026.carteira_final * 0.8),
+      indicacoes: Math.round(meta_2026.indicacoes * 0.8),
+      contratos: Math.round(meta_2026.contratos * 0.8),
+      captacao: Math.round(meta_2026.captacao_total * 0.8),
+      receita: Math.round(meta_2026.receita_gerada * 0.8),
+      churn: meta_2026.churn_anual_percent + 3, // Churn pior
+    },
+    moderado: {
+      carteira: meta_2026.carteira_final,
+      indicacoes: meta_2026.indicacoes,
+      contratos: meta_2026.contratos,
+      captacao: meta_2026.captacao_total,
+      receita: meta_2026.receita_gerada,
+      churn: meta_2026.churn_anual_percent,
+    },
+    agressivo: {
+      carteira: Math.round(meta_2026.carteira_final * 1.3),
+      indicacoes: Math.round(meta_2026.indicacoes * 1.3),
+      contratos: Math.round(meta_2026.contratos * 1.3),
+      captacao: Math.round(meta_2026.captacao_total * 1.3),
+      receita: Math.round(meta_2026.receita_gerada * 1.3),
+      churn: meta_2026.churn_anual_percent - 3, // Churn melhor
+    },
+  };
+
+  // Calcular metas mensais (distribuição proporcional)
+  const metas_mensais = Array.from({ length: 12 }, (_, i) => {
+    const mes = i + 1;
+    const fator_progressivo = (mes / 12); // Crescimento progressivo ao longo do ano
+    
+    return {
+      mes,
+      mes_nome: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'][i],
+      carteira_acumulada: Math.round(baseline_2025.carteira_ativa + (novos_parceiros_2026 * fator_progressivo)),
+      indicacoes: Math.round(meta_2026.indicacoes / 12),
+      contratos: Math.round(meta_2026.contratos / 12),
+      receita: Math.round(meta_2026.receita_gerada / 12),
+    };
+  });
+
+  // Calcular compensação dos gerentes (70% Matheus, 30% Viviane)
+  const compensacao_gerentes = {
+    matheus: {
+      meta_carteira: Math.round(meta_2026.carteira_final * 0.7),
+      meta_contratos: Math.round(meta_2026.contratos * 0.7),
+      receita_esperada: Math.round(meta_2026.receita_gerada * 0.7),
+    },
+    viviane: {
+      meta_carteira: Math.round(meta_2026.carteira_final * 0.3),
+      meta_contratos: Math.round(meta_2026.contratos * 0.3),
+      receita_esperada: Math.round(meta_2026.receita_gerada * 0.3),
+    },
+  };
+
   return {
+    baseline_2025,
+    meta_2026,
     crescimento: {
       carteira: Number(crescimento.carteira),
       churn: Number(crescimento.churn),
@@ -95,5 +154,8 @@ export function calcularPlanejamento(valores: ValoresBase) {
     taxa_conversao_indicacao_contrato,
     receita_media_por_parceiro,
     captacao_media_por_contrato,
+    cenarios,
+    metas_mensais,
+    compensacao_gerentes,
   };
 }
