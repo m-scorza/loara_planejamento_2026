@@ -13,10 +13,10 @@ import {
 } from "lucide-react";
 import { ValoresBase, VALORES_BASE_PADRAO, calcularPlanejamento } from "@/lib/planejamentoModel";
 import EditarValoresBase from "@/components/EditarValoresBase";
-import { GraficoEvolucaoCarteira } from "@/components/GraficoEvolucaoCarteira";
-import { GraficoComparacaoCenarios } from "@/components/GraficoComparacaoCenarios";
-import { GraficoMetasMensais } from "@/components/GraficoMetasMensais";
-import { GraficoDistribuicaoReceita } from "@/components/GraficoDistribuicaoReceita";
+import { GraficoEvolucaoCarteira } from "@/components/charts/GraficoEvolucaoCarteira";
+import { GraficoComparacaoCenarios } from "@/components/charts/GraficoComparacaoCenarios";
+import { GraficoMetasMensais } from "@/components/charts/GraficoMetasMensais";
+import { GraficoDistribuicaoReceita } from "@/components/charts/GraficoDistribuicaoReceita";
 
 interface Data {
   metadata: any;
