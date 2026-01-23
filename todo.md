@@ -15,3 +15,13 @@
 - [x] Criar gráfico de comparação de cenários
 - [x] Criar gráfico de metas mensais
 - [x] Criar gráfico de distribuição de receita
+
+## Revisão e Melhoria de Gráficos
+- [ ] Analisar gráficos Python originais (generate_charts.py)
+- [ ] Comparar com gráficos Recharts atuais
+- [ ] Identificar elementos visuais perdidos
+- [x] Melhorar gráfico de Evolução de Carteira
+- [x] Melhorar gráfico de Comparação de Cenários
+- [ ] Melhorar gráfico de Metas Mensais
+- [ ] Melhorar gráfico de Distribuição de Receita
+- [x] Adicionar gráficos faltantes (Funil de Conversão, Matriz de Riscos, etc.)

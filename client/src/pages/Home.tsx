@@ -17,6 +17,8 @@ import { GraficoEvolucaoCarteira } from "@/components/charts/GraficoEvolucaoCart
 import { GraficoComparacaoCenarios } from "@/components/charts/GraficoComparacaoCenarios";
 import { GraficoMetasMensais } from "@/components/charts/GraficoMetasMensais";
 import { GraficoDistribuicaoReceita } from "@/components/charts/GraficoDistribuicaoReceita";
+import { GraficoFunilConversao } from "@/components/charts/GraficoFunilConversao";
+import { GraficoMatrizRiscos } from "@/components/charts/GraficoMatrizRiscos";
 
 interface Data {
   metadata: any;
@@ -1192,7 +1194,12 @@ export default function Home() {
                   <GraficoDistribuicaoReceita compensacao_gerentes={dadosCalculados.compensacao_gerentes} />
                 </CardContent>
               </Card>
+            </div>
 
+            {/* Gráficos Adicionais */}
+            <div className="grid grid-cols-1 gap-6 mt-6">
+              <GraficoFunilConversao />
+              <GraficoMatrizRiscos />
             </div>
           </TabsContent>
         </Tabs>
