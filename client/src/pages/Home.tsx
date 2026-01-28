@@ -6,13 +6,15 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { 
-  TrendingUp, TrendingDown, Users, Target, DollarSign, 
+import {
+  TrendingUp, TrendingDown, Users, Target, DollarSign,
   AlertTriangle, CheckCircle, Calendar, FileText, BarChart3,
-  ArrowRight, ChevronRight, Building2, Briefcase, Shield, Settings
+  ArrowRight, ChevronRight, Building2, Briefcase, Shield, Settings, FileSpreadsheet
 } from "lucide-react";
 import { ValoresBase, VALORES_BASE_PADRAO, calcularPlanejamento } from "@/lib/planejamentoModel";
+import { carregarValoresLocal, salvarValoresLocal, DadosCompletos } from "@/lib/excelUtils";
 import EditarValoresBase from "@/components/EditarValoresBase";
+import ExcelManager from "@/components/ExcelManager";
 import { GraficoEvolucaoCarteira } from "@/components/charts/GraficoEvolucaoCarteira";
 import { GraficoComparacaoCenarios } from "@/components/charts/GraficoComparacaoCenarios";
 import { GraficoMetasMensais } from "@/components/charts/GraficoMetasMensais";
@@ -53,18 +55,33 @@ export default function Home() {
 
   const [data, setData] = useState<Data | null>(null);
   const [activeTab, setActiveTab] = useState("sumario");
-  const [valoresBase, setValoresBase] = useState<ValoresBase>(VALORES_BASE_PADRAO);
+  const [valoresBase, setValoresBase] = useState<ValoresBase>(() => carregarValoresLocal());
   const [modoEdicao, setModoEdicao] = useState(false);
-  
+  const [modoExcel, setModoExcel] = useState(false);
+
   // Calcular valores automaticamente quando valoresBase mudar
   const dadosCalculados = useMemo(() => {
     return calcularPlanejamento(valoresBase);
   }, [valoresBase]);
-  
+
   const handleSaveValores = (novosValores: ValoresBase) => {
     setValoresBase(novosValores);
+    salvarValoresLocal(novosValores);
     setModoEdicao(false);
   };
+
+  const handleImportExcel = (novosValores: ValoresBase) => {
+    setValoresBase(novosValores);
+    // Já foi salvo pelo ExcelManager
+  };
+
+  // Dados completos para exportação Excel
+  const dadosCompletos: DadosCompletos = useMemo(() => ({
+    valoresBase,
+    acompanhamento_mensal: data?.acompanhamento_mensal,
+    gerentes: data?.gerentes,
+    risks: data?.risks,
+  }), [valoresBase, data]);
 
   useEffect(() => {
     fetch("/data.json")
@@ -97,32 +114,52 @@ export default function Home() {
               <p className="text-blue-200 mt-1">Área de Parcerias - LOARA 2026</p>
             </div>
             <div className="text-right flex flex-col items-end gap-2">
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap justify-end">
                 <Link href="/files">
                   <Button variant="outline" size="sm" className="bg-white/10 text-white border-white/30 hover:bg-white/20">
-                    📁 Gestão de Ficheiros
+                    Ficheiros
                   </Button>
                 </Link>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="bg-white/10 text-white border-white/30 hover:bg-white/20"
-                  onClick={() => setModoEdicao(!modoEdicao)}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={`${modoExcel ? 'bg-green-500/30 border-green-400' : 'bg-white/10 border-white/30'} text-white hover:bg-white/20`}
+                  onClick={() => { setModoExcel(!modoExcel); setModoEdicao(false); }}
+                >
+                  <FileSpreadsheet className="h-4 w-4 mr-1" />
+                  {modoExcel ? 'Fechar Excel' : 'Excel'}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={`${modoEdicao ? 'bg-blue-500/30 border-blue-400' : 'bg-white/10 border-white/30'} text-white hover:bg-white/20`}
+                  onClick={() => { setModoEdicao(!modoEdicao); setModoExcel(false); }}
                 >
                   <Settings className="h-4 w-4 mr-1" />
-                  {modoEdicao ? 'Fechar Edição' : 'Editar Valores'}
+                  {modoEdicao ? 'Fechar' : 'Editar'}
                 </Button>
               </div>
               <Badge variant="outline" className="bg-green-500/20 text-green-200 border-green-400 text-sm px-3 py-1">
-                Cenário Recomendado: MODERADO
+                Cenario Recomendado: MODERADO
               </Badge>
-              <p className="text-blue-200 text-sm">Versão 4.0 | 13/01/2026</p>
+              <p className="text-blue-200 text-sm">Versao 4.0 | 13/01/2026</p>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Painel de Edição */}
+      {/* Painel de Gerenciamento Excel */}
+      {modoExcel && (
+        <div className="max-w-7xl mx-auto px-6 pt-6">
+          <ExcelManager
+            valoresBase={valoresBase}
+            dadosCompletos={dadosCompletos}
+            onImport={handleImportExcel}
+          />
+        </div>
+      )}
+
+      {/* Painel de Edição Manual */}
       {modoEdicao && (
         <div className="max-w-7xl mx-auto px-6 pt-6">
           <EditarValoresBase valores={valoresBase} onSave={handleSaveValores} />
